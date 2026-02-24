@@ -4,6 +4,20 @@ import java.io.*;
 
 public class PracticeProblemTest {
 
+   InputStream originalIn = System.in;
+   PrintStream originalOut = System.out;
+   ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+   @BeforeEach
+   public void setUp() {
+      System.setOut(new PrintStream(bos));
+   }
+
+   @AfterEach
+   public void tearDown() {
+      System.setOut(originalOut);
+      System.setIn(originalIn);
+   }
    
 
    @Test
@@ -12,9 +26,6 @@ public class PracticeProblemTest {
       String data = "2\n5\n";
       System.setIn(new ByteArrayInputStream(data.getBytes()));
       
-      PrintStream originalOut = System.out;
-      ByteArrayOutputStream bos = new ByteArrayOutputStream();
-      System.setOut(new PrintStream(bos));
 
       // action
       PracticeProblem.q1();
@@ -22,8 +33,6 @@ public class PracticeProblemTest {
       // assertion
       assertEquals("Input a number: Input a number: 7\n", bos.toString());
 
-      // undo the binding in System
-      System.setOut(originalOut);
    }
 
    @Test
@@ -32,9 +41,6 @@ public class PracticeProblemTest {
       String data = "1\n2\n";
       System.setIn(new ByteArrayInputStream(data.getBytes()));
       
-      PrintStream originalOut = System.out;
-      ByteArrayOutputStream bos = new ByteArrayOutputStream();
-      System.setOut(new PrintStream(bos));
 
       // action
       PracticeProblem.q1();
@@ -42,8 +48,6 @@ public class PracticeProblemTest {
       // assertion
       assertEquals("Input a number: Input a number: 3\n", bos.toString());
 
-      // undo the binding in System
-      System.setOut(originalOut);
    }
 
    @Test
